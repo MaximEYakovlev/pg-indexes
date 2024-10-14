@@ -14,4 +14,22 @@ const connect = async () => {
     }
 }
 
-connect();
+const createTable = async () => {
+    await sequelize.query(`
+        CREATE TABLE IF NOT EXISTS test1 (id integer, content varchar);
+    `);
+}
+
+const createIndex = async () => {
+    await sequelize.query(`
+        CREATE INDEX test1_id_index ON test1 (id);
+    `);
+}
+
+const run = async () => {
+    await connect();
+    await createTable();
+    await createIndex();
+}
+
+run();
